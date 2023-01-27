@@ -10,7 +10,7 @@ import Foundation
 class Calculator {
     private var outputQueue: [String] = []
     private var operatorStack: [String] = []
-    private let precedence: [String: Int] = ["+": 1, "-": 1, "*": 2, "/": 2, "^": 3]
+    private let precedence: [String: Int] = ["+": 1, "-": 1, "x": 2, "÷": 2, "^": 3]
     private let associativity: [String: String] = ["+": "Left", "-": "Left", "*": "Left", "/": "Left", "^": "Right"]
     
     func evaluateExpression(expression: String) -> Double {
@@ -51,8 +51,8 @@ class Calculator {
                 switch token {
                 case "+": stack.append(op1 + op2)
                 case "-": stack.append(op1 - op2)
-                case "*": stack.append(op1 * op2)
-                case "/": stack.append(op1 / op2)
+                case "x": stack.append(op1 * op2)
+                case "÷": stack.append(op1 / op2)
                 case "^": stack.append(pow(op1, op2))
                 default: break
                 }

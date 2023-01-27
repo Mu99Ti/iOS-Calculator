@@ -5,6 +5,7 @@
 //  Created by Muhamad Talebi on 1/26/23.
 //
 
+
 import UIKit
 
 class CalculatorViewController: UIViewController {
@@ -53,23 +54,39 @@ class CalculatorViewController: UIViewController {
         let buttonTitles = ["AC", "+/-", "%", "÷", "7", "8", "9", "x", "4", "5", "6", "-", "1", "2", "3", "+", "0", ".", "="]
         for i in 0..<buttonTitles.count {
             let button = UIButton(type: .system)
+            let buttonX = i % 4
+            let buttonY = i/4
             button.setTitle(buttonTitles[i], for: .normal)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
             button.setTitleColor(.black, for: .normal)
-            button.backgroundColor = .white
+            button.backgroundColor = UIColor.lightGray
             button.layer.borderWidth = 0.5
+            button.layer.cornerRadius = 45
             button.layer.borderColor = UIColor.lightGray.cgColor
             button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
             view.addSubview(button)
             button.translatesAutoresizingMaskIntoConstraints = false
-            let buttonX = i % 4
-            let buttonY = i/4
             NSLayoutConstraint.activate([
                 button.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25),
                 button.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
                 button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(buttonX) * view.frame.size.width/4),
                 button.topAnchor.constraint(equalTo: displayLabel.bottomAnchor, constant: CGFloat(buttonY) * (view.frame.size.height * 0.1))
             ])
+            
+            if(buttonTitles[i] == "AC"
+               || buttonTitles[i] == "+/-"
+               || buttonTitles[i] == "%"){
+                button.backgroundColor = UIColor.darkGray
+            }
+            
+            if(buttonTitles[i] == "÷"
+               || buttonTitles[i] == "x"
+               || buttonTitles[i] == "="
+               || buttonTitles[i] == "+"
+               || buttonTitles[i] == "-"){
+                button.backgroundColor = UIColor.orange
+            }
+            
             buttons.append(button)
         }
     }
