@@ -12,6 +12,7 @@ class CalculatorViewController: UIViewController {
     
     private let calculator = Calculator()
     private var currentExpression = ""
+    private var currentResult = ""
     private var displayValue: Double {
         get {
             return Double(displayLabel.text!)!
@@ -92,18 +93,23 @@ class CalculatorViewController: UIViewController {
     }
     
     func numberButtonPressed(_ sender: String) {
-            currentExpression += sender
-            displayLabel.text = currentExpression
+//        if currentResult != "" {
+//            currentExpression = ""
+//            currentResult = ""
+//        }
+        currentExpression += sender
+        displayLabel.text = sender
         }
     
      func operatorButtonPressed(_ sender: String) {
-            currentExpression += " " + sender + " "
-            displayLabel.text = currentExpression
+//         print("currentExpression: \(currentExpression)")
+//         print("currentResult: \(currentResult)")
+             currentExpression += calculator.separator + sender + calculator.separator
         }
     
      func evaluateButtonPressed() {
-            displayValue = calculator.evaluateExpression(expression: currentExpression)
-            currentExpression = ""
+         displayValue = calculator.evaluateExpression(expression: currentExpression)
+         currentExpression = ""
         }
      func clearButtonPressed() {
             currentExpression = ""

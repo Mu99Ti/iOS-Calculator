@@ -12,11 +12,13 @@ class Calculator {
     private var operatorStack: [String] = []
     private let precedence: [String: Int] = ["+": 1, "-": 1, "x": 2, "÷": 2, "^": 3]
     private let associativity: [String: String] = ["+": "Left", "-": "Left", "*": "Left", "/": "Left", "^": "Right"]
-    
+    let separator = " "
     func evaluateExpression(expression: String) -> Double {
         outputQueue = []
         operatorStack = []
-        let tokens = expression.split(separator: " ").map { String($0) }
+        let tokens = expression.split(separator: Character(separator)).map { String($0) }
+        print(tokens.count)
+        print(tokens)
         for token in tokens {
             if let value = Double(token) {
                 outputQueue.append(token)
@@ -37,6 +39,7 @@ class Calculator {
         while operatorStack.count > 0 {
             outputQueue.append(operatorStack.removeLast())
         }
+        
         return evaluateRPN(outputQueue)
     }
     
@@ -55,7 +58,7 @@ class Calculator {
                 case "÷": stack.append(op1 / op2)
                 case "^": stack.append(pow(op1, op2))
                 default: break
-                }
+                }       
             }
         }
         return stack.last!
