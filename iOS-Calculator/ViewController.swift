@@ -63,7 +63,7 @@ class CalculatorViewController: UIViewController {
             view.addSubview(button)
             button.translatesAutoresizingMaskIntoConstraints = false
             let buttonX = i % 4
-            let buttonY = i / 4
+            let buttonY = i/4
             NSLayoutConstraint.activate([
                 button.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25),
                 button.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
